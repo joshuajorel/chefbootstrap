@@ -1,0 +1,7 @@
+CREATE DATABASE demosite;
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('P@ssw0rd');
+CREATE USER 'demouser'@'localhost' IDENTIFIED BY 'P@ssw0rd';
+GRANT ALL PRIVILEGES ON *.* TO 'demouser'@'localhost' WITH GRANT OPTION;
+CREATE USER 'demouser'@'%' IDENTIFIED BY 'P@ssw0rd';
+GRANT ALL PRIVILEGES ON *.* TO 'demouser'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
