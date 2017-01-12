@@ -1,24 +1,20 @@
 # Overview
 
-Every Chef installation needs a Chef Repository. This is the place where cookbooks, roles, config files and other artifacts for managing systems with Chef will live. We strongly recommend storing this repository in a version control system such as Git and treat it like source code.
+This is a bootstrap guide to quickly use Chef. It's a simple web server that connects to a MySQL database in AWS. There will be 2 methods to deploy the application. The first is using a standard Chef or Hosted Chef server. The second is via Chef Solo or local mode.
 
-While we prefer Git, and make this repository available via GitHub, you are welcome to download a tar or zip archive and use your favorite version control system to manage the code.
+# Prerequisites
 
-# Repository Directories
+In your local machine, install the Chef DK. <https://docs.chef.io/install_dk.html>
 
-This repository contains several directories, and each directory contains a README file that describes what it is for in greater detail, and how to use it for managing your systems with Chef.
+Sign-up for a Hosted Chef account and create your own organization. Download the knife.rb file and ssh key then place it in the .chef folder.
 
-- `cookbooks/` - Cookbooks you download or create.
-- `data_bags/` - Store data bags and items in .json in the repository.
-- `roles/` - Store roles in .rb or .json in the repository.
-- `environments/` - Store environments in .rb or .json in the repository.
+Provision 2 AWS EC2 instances.
 
-# Configuration
+Make sure that one instance will have port 80 open, while the other has port 3306 open.
 
-The config file, `.chef/knife.rb` is a repository specific configuration file for knife. If you're using the Chef Platform, you can download one for your organization from the management console. If you're using the Open Source Chef Server, you can generate a new one with `knife configure`. For more information about configuring Knife, see the Knife documentation.
 
 <https://docs.chef.io/knife.html>
 
-# Next Steps
+# Additional Work
 
-Read the README file in each of the subdirectories for more information about what goes in those directories.
+Initialize an additional 2 EC2 instances and
