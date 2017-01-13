@@ -1,2 +1,2 @@
 !#/bin/bash
-knife bootstrap 52.14.17.231 --ssh-user USER --sudo --identity-file IDENTITY_FILE --node-name node1-centos --run-list 'recipe[learn_chef_httpd]'
+knife bootstrap 52.14.70.219 --ssh-user ec2-user --sudo --identity-file ../joshua-chef-instance.pem --node-name webapp-1 --run-list 'recipe[demo-app]'

@@ -1,0 +1,9 @@
+use <%= node['sqlserver']['dbname'] %>;
+
+create table if not exists views (
+  pkey int not null,
+  counter int not null,
+  primary key (pkey)
+);
+insert ignore into `views`
+  set `pkey` = '1';

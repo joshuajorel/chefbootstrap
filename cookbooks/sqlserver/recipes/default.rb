@@ -20,7 +20,7 @@ mysql_client 'default' do
   action [:create]
 end
 
-root = search(:sqlcreds, "username:root").first
+root = search(:sqlcreds, "username:#{node['sqlserver']['root_username']}").first
 user = search(:sqlcreds,"username:#{node['sqlserver']['user']}").first
 
 # Configure the MySQL service.
@@ -57,4 +57,14 @@ mysql_database_user node['sqlserver']['user'] do
   database_name node['sqlserver']['dbname']
   host '%'
   action [:create, :grant]
+end
+
+# initialize tables if it doesn't exist
+template '/tmp/init.sql' do
+  source 'init.sql.erb'
+  action :create
+end
+
+execute 'execute init.sql script' do
+  command "mysql -u #{node['sqlserver']['user']} -p#{user['password']} -S /var/run/mysql-demo/mysqld.sock < /tmp/init.sql"
 end

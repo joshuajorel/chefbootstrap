@@ -9,7 +9,7 @@ def hello():
 
 @app.route("/viewer")
 def viewer():
-  db = MySQLdb.Connection(host="52.14.59.54", user="demouser", passwd="randompassword", db="demo-site")
+  db = MySQLdb.Connection(host="<%= @host %>", user="<%= @user %>", passwd="<%= @passwd %>", db="<%= @db %>")
   cur = db.cursor()
   cur.execute("""
     select counter
