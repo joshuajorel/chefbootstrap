@@ -4,7 +4,7 @@ maintainer_email 'you@example.com'
 license 'all_rights'
 description 'Installs/Configures sqlserver'
 long_description 'Installs/Configures sqlserver'
-version '0.4.0'
+version '0.5.0'
 
 depends 'selinux', '~>0.9.0'
 depends 'yum-mysql-community', '~>2.0.3'

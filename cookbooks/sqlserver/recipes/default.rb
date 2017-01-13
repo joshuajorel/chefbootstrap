@@ -4,14 +4,12 @@
 #
 # Copyright (c) 2017 The Authors, All Rights Reserved.
 
-# hack: due to an issue with the mysql cookbook, must perform this step first
+# hack: due to an issue with the mysql cookbook in rhel/centos, must perform this step first
 template "/etc/sysconfig/selinux" do
-  source selinux.erb
+  source "selinux.erb"
 end
 
 include_recipe 'selinux::permissive'
-
-
 
 execute "yum local install mysql" do
   command "yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm -y"
@@ -26,10 +24,9 @@ root = search(:sqlcreds, "username:root").first
 user = search(:sqlcreds,"username:#{node['sqlserver']['user']}").first
 
 # Configure the MySQL service.
-mysql_service 'default' do
-  version '5.5'
+mysql_service 'demo' do
+  version '5.7'
   bind_address '0.0.0.0'
-  data_dir '/data'
   initial_root_password root["password"]
   action [:create, :start]
 end
@@ -58,6 +55,6 @@ mysql_database_user node['sqlserver']['user'] do
   )
   password user["password"]
   database_name node['sqlserver']['dbname']
-  host node['sqlserver']['host']
+  host '%'
   action [:create, :grant]
 end
