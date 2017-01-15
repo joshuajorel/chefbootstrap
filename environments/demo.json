@@ -1,5 +1,5 @@
 {
-    "name": "demo environment",
+    "name": "demo",
     "description": "This is an example environment for the demo application. Add additional environments (QA, staging, prod) to vary settings.",
     "chef_type": "environment",
     "json_class": "Chef::Environment",

@@ -1,0 +1,15 @@
+{
+   "normal": {
+   },
+   "name": "sql-server-1",
+   "override": {
+   },
+   "default": {
+   },
+   "json_class": "Chef::Node",
+   "ip": "SQL_IP",
+   "run_list": [
+      "role[sqlserver]"
+   ],
+   "chef_type": "node"
+}

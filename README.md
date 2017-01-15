@@ -16,24 +16,57 @@ Make sure that one instance will have port 80 open, while the other has port 330
 
 ## Chef Server
 
-1.) Initialize the MySQL server by uploading the mysql55 cookbook to the chef server and initializing the EC2 instance with port 3306 open. Run the following on your chef workstation:
+Open the terminal and change the directory to the project folder. Run the following commands.
+
+1) Install cookbook dependencies.
 
 ```sh
-$ knife cookbook upload mysql55
-$ knife bootstrap SQL_INSTANCE_IP --ssh-user ec2-user --sudo --identity-file IDENTITY_FILE --node-name sql-node-1 --run-list 'recipe[mysql55]'
+$ berks install
+$ berks upload
 ```
 
-Replace the required values for the script.
+2) Upload roles and environment:
 
-2.)
+```sh
+$ knife role from file roles/*.json
+$ knife environment from file environments/demo.json
+```
 
+3) Upload data_bags
 
+```sh
+$ knife upload data_bags
+```
+
+4) Upload cookbooks:
+
+```sh
+$ knife cookbook upload sqlserver
+$ knife cookbook upload demo-app
+```
+
+5) Bootstrap sql server and web app server
+
+```sh
+$ knife bootstrap SQL_IP --ssh-user ec2-user --sudo --identity-file IDENTITY_FILE --node-name sql-server-1 --run-list 'role[sqlserver]'
+$ knife bootstrap APP_IP --ssh-user ec2-user --sudo --identity-file IDENTITY_FILE --node-name demo-app-1 --run-list 'role[demo-app]'
+```
+
+Where:
+SQL_IP is the IP Address of the EC2 instance where port 3306 is open.
+APP_IP is the IP Address of the EC2 instance where port 80 is open.
+IDENTITY_FILE is a path to the EC2 .pem file.
+
+## Chef Solo
+1) Add the IP Addresses to the corresponding files in the nodes folder.
+
+2) Run the following commands:
+
+```sh
+$ chef-solo -c solo.rb -j nodes/sql-server-1.json
+$ chef-solo -c solo.rb -j nodes/demo-app-1.json
+```
 
 # Additional Work
 
 Initialize an additional web app instance then connect the 2 web app instances to a Nginx load balancer.
-
-
-berks install
-berks upload
-upload data bags

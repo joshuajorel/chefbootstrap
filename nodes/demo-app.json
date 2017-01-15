@@ -1,0 +1,15 @@
+{
+   "normal": {
+   },
+   "name": "demo-app-1",
+   "override": {
+   },
+   "default": {
+   },
+   "json_class": "Chef::Node",
+   "ip": "APP_IP",
+   "run_list": [
+      "role[demo-app]"
+   ],
+   "chef_type": "node"
+}
