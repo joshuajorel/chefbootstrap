@@ -19,7 +19,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[mysql55::default]
+      - recipe[demo-app::default]
     verifier:
       inspec_tests:
         - test/recipes

@@ -21,3 +21,11 @@ template '/opt/demo.py' do
   action :create
 end
 
+template '/etc/supervisord.conf' do
+  source 'supervisord.conf.erb'
+  action :create
+end
+
+service 'supervisord' do
+  action [:enable, :start]
+end

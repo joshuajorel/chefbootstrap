@@ -12,7 +12,7 @@ execute "update yum" do
   command "yum update -y"
 end
 
-["python-devel", "python-pip", "MySQL-python"].each do |p|
+["python-devel", "python-pip", "MySQL-python", "supervisor"].each do |p|
   yum_package p do
     action :install
   end
